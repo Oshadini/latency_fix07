@@ -176,13 +176,13 @@ if uploaded_file is not None:
 
       # Apply to text if texts are provided and summarization is requested
       if texts and summarize_texts:
-          text_summaries = summarize_chain.batch(texts, {"max_concurrency": max_concurrecy})
+          text_summaries = summarize_chain.batch(texts, {"max_concurrency": 10})
       elif texts:
           text_summaries = texts
 
       # Apply to tables if tables are provided
       if tables:
-          table_summaries = summarize_chain.batch(tables, {"max_concurrency":max_concurrecy})
+          table_summaries = summarize_chain.batch(tables, {"max_concurrency":10})
 
       return text_summaries, table_summaries
         
@@ -278,7 +278,7 @@ if uploaded_file is not None:
     
     @st.cache_resource()
     def create_multi_vector_retriever(
-      vectorstore, text_summaries, texts, table_summaries, tables, image_summaries, images
+      _vectorstore, text_summaries, texts, table_summaries, tables, image_summaries, images
     ):
       """
       Create retriever that indexes summaries, but returns raw images or texts
