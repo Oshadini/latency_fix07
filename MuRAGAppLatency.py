@@ -94,7 +94,6 @@ if uploaded_file is not None:
 
     
     image_path = "./"
-    @st.cache_data()
     def pdf_ele(image_path,ele_path):
         pdf_elements = partition_pdf(
             ele_path,
