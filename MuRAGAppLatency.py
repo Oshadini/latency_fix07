@@ -260,10 +260,11 @@ if uploaded_file is not None:
                 image_summaries.append(image_summarize(base64_image, prompt))
         
         return img_base64_list, image_summaries
-        
+
+        fpath= './figures'
         if 'image_elements' not in st.session_state:
             with st.spinner("Generating Images summaries......"):
-            img_base64_list, image_summaries = generate_img_summaries(fpath)
+                img_base64_list, image_summaries = generate_img_summaries(fpath)
     
             st.session_state["img_base64_list"] = img_base64_list
             st.session_state["image_summaries"] = image_summaries
