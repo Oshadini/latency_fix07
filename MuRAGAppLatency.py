@@ -92,18 +92,24 @@ if uploaded_file is not None:
     with open(temp_file,"wb") as file:
         file.write(uploaded_file.getvalue())
 
+    
     image_path = "./"
-    pdf_elements = partition_pdf(
-        temp_file,
-        chunking_strategy="by_title",
-        #chunking_strategy="basic",
-        extract_images_in_pdf=True,
-        infer_table_structure=True,
-        max_characters=3000,
-        new_after_n_chars=2800,
-        combine_text_under_n_chars=2000,
-        image_output_dir_path=image_path
-    )
+    @st.cache_data()
+    def pdf_ele(image_path,ele_path):
+        pdf_elements = partition_pdf(
+            ele_path,
+            chunking_strategy="by_title",
+            #chunking_strategy="basic",
+            extract_images_in_pdf=True,
+            infer_table_structure=True,
+            max_characters=3000,
+            new_after_n_chars=2800,
+            combine_text_under_n_chars=2000,
+            image_output_dir_path=image_path
+        )
+        return pdf_elements
+
+    pdf_elements = pdf_ele(image_path,temp_file)
 
     # Categorize elements by type
     @st.cache_data()
