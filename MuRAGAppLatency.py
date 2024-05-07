@@ -261,19 +261,19 @@ if uploaded_file is not None:
         
         return img_base64_list, image_summaries
 
-        fpath= './figures'
-        if 'image_elements' not in st.session_state:
-            with st.spinner("Generating Images summaries......"):
-                img_base64_list, image_summaries = generate_img_summaries(fpath)
+    fpath= './figures'
+    if 'image_elements' not in st.session_state:
+        with st.spinner("Generating Images summaries......"):
+            img_base64_list, image_summaries = generate_img_summaries(fpath)
+
+        st.session_state["img_base64_list"] = img_base64_list
+        st.session_state["image_summaries"] = image_summaries
+    else:
+        img_base64_lists = st.session_state["img_base64_list"]  
+        image_summaries = st.session_state["image_summaries"]  
     
-            st.session_state["img_base64_list"] = img_base64_list
-            st.session_state["image_summaries"] = image_summaries
-        else:
-            img_base64_lists = st.session_state["img_base64_list"]  
-            image_summaries = st.session_state["image_summaries"]  
-        
-        st.write(f"{bullet_point} \t\tImage summaries generation completed") 
-        st.write(f"{bullet_point} Summary generation process completed")  
+    st.write(f"{bullet_point} \t\tImage summaries generation completed") 
+    st.write(f"{bullet_point} Summary generation process completed")  
         
     
     @st.cache_resource()
