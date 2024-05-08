@@ -71,11 +71,13 @@ immage_sum_model = st.sidebar.selectbox('Summarize by', ('gpt-4-vision-preview',
 st.sidebar.subheader('Response Generation Model')
 generation_model = st.sidebar.selectbox('Select data', ('gpt-4-vision-preview', 'gemini-1.5-pro-latest'))
 
-#st.sidebar.subheader('Line chart parameters')
-#plot_data = st.sidebar.multiselect('Select data', ['temp_min', 'temp_max'], ['temp_min', 'temp_max'])
+
 max_concurrecy = st.sidebar.slider('Maximum Concurrency', 3, 4, 7)
 
 uploaded_file = st.file_uploader(label = "Upload your file",type="pdf")
+
+st.sidebar.subheader('Upload your file')
+uploaded_file = st.sidebar.file_uploader(label = "Upload your file",type="pdf")
 
 st.sidebar.markdown('''
 ---
