@@ -490,7 +490,7 @@ if(question):
 
     for i in range(len(docs)):
       if docs[i].startswith('/9j') and not found_image:
-          display.display(HTML(f'<img src="data:image/jpeg;base64,{docs[i]}">'))
+          #display.display(HTML(f'<img src="data:image/jpeg;base64,{docs[i]}">'))
 
           base64_image = docs[i]
           image_data = base64.b64decode(base64_image)
