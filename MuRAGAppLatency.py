@@ -434,34 +434,48 @@ if uploaded_file is not None:
               }
               messages.append(image_message)
       return [HumanMessage(content=messages)]
+
+    def multi_modal_rag_chain(retriever):
+        """
+        Multi-modal RAG chain
+        """
+
+        if generation_model == 'gemini-1.5-pro-latest':
+            model = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest",max_output_tokens=1024)
+        else:
+            try:
+              model = ChatOpenAI(model="gpt-4-vision-preview", openai_api_key = openai.api_key, max_tokens=1024)
+            except Exception as e:
+              model = ChatOpenAI(model="gpt-4-turbo", openai_api_key = openai.api_key, max_tokens=1024)
+
+        # RAG pipeline
+        chain = (
+            {
+                "context": retriever | RunnableLambda(split_image_text_types),
+                "question": RunnablePassthrough(),
+            }
+            | RunnableLambda(img_prompt_func)
+            | model
+            | StrOutputParser()
+        )
+
+        return chain
     
-    
-    if generation_model == 'gemini-1.5-pro-latest':
-        model = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest",max_output_tokens=1024)
+
+    chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
+
+
+    if chain_multimodal_rag not in session:
+        st.session_state["chain_multimodal_rag"] = chain_multimodal_rag
     else:
-        try:
-          model = ChatOpenAI(model="gpt-4-vision-preview", openai_api_key = openai.api_key, max_tokens=1024)
-        except Exception as e:
-          model = ChatOpenAI(model="gpt-4-turbo", openai_api_key = openai.api_key, max_tokens=1024)
+        chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
+
+if(question):
+    chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
+    response= chain_multimodal_rag.invoke(question)
+    st.write(response)
     
-    # RAG pipeline
-    chain = (
-      {
-          "context": retriever_multi_vector_img | RunnableLambda(split_image_text_types),
-          "question": RunnablePassthrough(),
-      }
-      | RunnableLambda(img_prompt_func)
-      | model
-      | StrOutputParser()
-    )
-    
-    
-    if(question):
-        response=chain.invoke(question)
-        st.write('Response:')
-        with st.container(height=300):
-            st.write(response)
-        
+
     
     
     
