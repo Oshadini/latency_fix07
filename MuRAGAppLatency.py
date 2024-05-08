@@ -471,16 +471,11 @@ if uploaded_file is not None:
     chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
 
 
-    if chain_multimodal_rag not in st.session_state:
-        st.session_state["chain_multimodal_rag"] = chain_multimodal_rag
-    else:
+    question = st.text_input('Enter a question') 
+    if(question):
         chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
-
-question = st.text_input('Enter a question') 
-if(question):
-    chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
-    response= chain_multimodal_rag.invoke(question)
-    st.write(response)
+        response= chain_multimodal_rag.invoke(question)
+        st.write(response)
     
 
     
