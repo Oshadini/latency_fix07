@@ -465,7 +465,7 @@ if uploaded_file is not None:
     chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
 
 
-    if chain_multimodal_rag not in session:
+    if chain_multimodal_rag not in st.session_state:
         st.session_state["chain_multimodal_rag"] = chain_multimodal_rag
     else:
         chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
