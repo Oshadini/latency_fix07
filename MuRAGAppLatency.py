@@ -101,9 +101,10 @@ if uploaded_file is not None:
             #chunking_strategy="basic",
             extract_images_in_pdf=True,
             infer_table_structure=True,
-            max_characters=3000,
-            new_after_n_chars=2800,
-            combine_text_under_n_chars=2000,
+            strategy='hi_res',
+            max_characters=3200,
+            new_after_n_chars=3000,
+            combine_text_under_n_chars=2200,
             image_output_dir_path=image_path
         )
         return pdf_elements
