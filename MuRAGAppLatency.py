@@ -75,6 +75,8 @@ generation_model = st.sidebar.selectbox('Select data', ('gpt-4-vision-preview', 
 #plot_data = st.sidebar.multiselect('Select data', ['temp_min', 'temp_max'], ['temp_min', 'temp_max'])
 max_concurrecy = st.sidebar.slider('Maximum Concurrency', 3, 4, 7)
 
+uploaded_file = st.file_uploader(label = "Upload your file",type="pdf")
+
 st.sidebar.markdown('''
 ---
 Multi-Modal RAG App with Multi Vector Retriever
@@ -85,7 +87,7 @@ Multi-Modal RAG App with Multi Vector Retriever
 
 bullet_point = "◇"
 
-uploaded_file = st.file_uploader(label = "Upload your file",type="pdf")
+
 question = st.text_input('Enter a question') 
 if uploaded_file is not None:
     temp_file="./temp.pdf"
