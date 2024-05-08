@@ -485,6 +485,7 @@ if(question):
     st.write(response)
     retriever_multi_vector_img = st.session_state["retriever_multi_vector_img"]
     docs = retriever_multi_vector_img.get_relevant_documents(query, limit=1)
+    st.write(docs)
     found_image = False  # Flag variable to track if an image has been found
     
     for i in range(len(docs)):
