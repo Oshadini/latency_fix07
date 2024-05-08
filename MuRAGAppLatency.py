@@ -473,7 +473,7 @@ if uploaded_file is not None:
 
     question = st.text_input('Enter a question') 
     if(question):
-        chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
+        #chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
         response= chain_multimodal_rag.invoke(question)
         st.write(response)
     
