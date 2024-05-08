@@ -91,6 +91,8 @@ bullet_point = "◇"
 
 
 if uploaded_file is not None:
+    st.title("Extraction process:-")
+    st.write(f"{bullet_point} Extraction process started")
     temp_file="./temp.pdf"
     with open(temp_file,"wb") as file:
         file.write(uploaded_file.getvalue())
@@ -146,7 +148,8 @@ if uploaded_file is not None:
         # Use already populated session state variables
         texts = st.session_state["texts"]
         tables = st.session_state["tables"]
-    st.write(f"{bullet_point} \t\tCategorize elements completed")  
+    st.write(f"{bullet_point} \t\tCategorize elements completed") 
+    st.write(f"{bullet_point} Extraction process completed")
 
     # Generate summaries of text elements
     @st.cache_data()
