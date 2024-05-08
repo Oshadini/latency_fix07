@@ -475,14 +475,31 @@ if uploaded_file is not None:
     else:
         chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
 
+
+     
+
 question = st.text_input('Enter a question') 
 if(question):
     chain_multimodal_rag = st.session_state["chain_multimodal_rag"]
     response= chain_multimodal_rag.invoke(question)
     st.write(response)
+    retriever_multi_vector_img = st.session_state["retriever_multi_vector_img"]
+    docs = retriever_multi_vector_img.get_relevant_documents(query, limit=1)
+    found_image = False  # Flag variable to track if an image has been found
     
+    for i in range(len(docs)):
+      if docs[i].startswith('/9j') and not found_image:
+          display.display(HTML(f'<img src="data:image/jpeg;base64,{docs[i]}">'))
+    
+          base64_image = docs[i]
+          image_data = base64.b64decode(base64_image)
+    
+          # Display the image
+          #img = Image.open(BytesIO(image_data))
+          #img.show()
+          #img = load_image(image_data)
+          st.image(image_data)
 
-    
     
     
     
