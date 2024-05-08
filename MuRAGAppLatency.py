@@ -499,7 +499,7 @@ if(question):
           #img = Image.open(BytesIO(image_data))
           #img.show()
           #img = load_image(image_data)
-          st.write(image_data)
+          st.image(image_data)
           found_image = True  # Set the flag to True to indicate that an image has been found 
     
     
