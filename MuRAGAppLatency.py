@@ -60,7 +60,7 @@ with open('style.css') as f:
 st.sidebar.header('Multi-Modal RAG App`PDF`')
 
 st.sidebar.subheader('Text Summarization Model')
-time_hist_color = st.sidebar.selectbox('Summarize by', ('gpt-4-turbo', 'gemini-1.5-pro-latest'))
+time_hist_color = st.sidebar.selectbox('Summarize by', ('gpt-4-turbo', 'gemini-1.5-pro-latest', 'llama3'))
 
 st.sidebar.subheader('Image Summarization Model')
 immage_sum_model = st.sidebar.selectbox('Summarize by', ('gpt-4-vision-preview', 'gemini-1.5-pro-latest'))
